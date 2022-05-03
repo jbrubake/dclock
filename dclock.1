@@ -1,0 +1,361 @@
+.TH DCLOCK 1 "1 March 1988" "X Version 11"
+.SH NAME
+dclock - digital clock for X
+.SH SYNOPSIS
+.B dclock
+[-\fItoolkitoption\fP ...] [-option ...]
+.SH DESCRIPTION
+The
+.I dclock 
+program displays the time in digital format only.  The time is
+updated on a per second basis or on a per minute basis.  This program is
+nothing more than a wrapper around the dclock widget not associated with
+any particular widget set.
+.sp
+When the clock is running, the user may change attributes by typing:
+.in +2
+.ta 2i
+.nf
+\fBr\fP	Toggles \fBReverse Video\fP.
+\fBs\fP	Toggles the \fBseconds\fP display.
+\fBb\fP	Toggles the \fBbell\fP attribute.
+\fBj\fP	Toggles the \fBjump/scroll\fP attribute.
+\fBf\fP	Toggles the \fBfade\fP attribute.
+\fBd\fP	Toggles the \fBdate\fP format.
+\fBu\fP	Toggles the location of \fBdate\fP (top/bottom).
+\fBm\fP	Toggles the \fBmilitary time\fP format.
+\fBa\fP	Toggles the \fBalarm clock\fP.
+\fBt\fP	Toggles the \fBtails\fP attribute.
+\fB:\fP	Toggles the \fBblinking colon\fP.
+\fB/\fP	Increases the tilt of the numbers.
+\fB\\\fP	Decreases the tilt of the numbers.
+\fB+\fP	Increases the thickness of the numbers.
+\fB-\fP	Decreases the thickness of the numbers.
+\fB>\fP	Increases the spacing between numbers.
+\fB<\fP	Decreases the spacing between numbers.
+\fBq\fP	quits the program.
+.sp
+.fi
+.in -2
+The third mouse button puts the clock in the mode where the alarm clock can
+be set.  The alarm must be set in 24-hour format to distringuish between
+am and pm time.  Digits can be changed by selecting the digit with the
+left or middle mouse button.  The Left button advances the time while the
+Middle button moves the time backwards.  Using the left or middle button
+over the text at the bottom of the clock toggles the alarm from actually
+being set (or, use the 'a' key).
+.SH OPTIONS
+.I Dclock
+accepts all of the standard X Toolkit command line options along with the 
+additional options listed below:
+.TP 8
+.B \-help
+This option indicates that a brief summary of the allowed options should be
+printed on the standard error.
+.TP 8
+.B \-bell
+.TP 8
+.B \-nobell
+.br
+This option, if enabled, indicates that the bell will beep
+once on the half hour and twice on the hour.
+.TP 8
+.B \-bellFile \fIfilename\fP
+This specifies a sound file to use to play the dclock hourly chime.  If
+unspecified, or the string "NULL" is used, the system beep is used instead.
+The sound file format must be understood by the executable specified by
+option "audioPlay".  The "NULL" value is a means to override a system-level
+setting to disable external sound playing.
+.TP 8
+.B \-miltime
+.TP 8
+.B \-nomiltime
+.br
+This option, if enabled, causes the clock to display the time in 24 hour
+(military) time format.
+.TP 8
+.B \-utc
+.TP 8
+.B \-noutc
+.br
+This option, causes the clock to display the UTC (GMT) time rather than
+the default local time.
+.TP 8
+.B \-tails
+.TP 8
+.B \-notails
+.br
+This option places [or removes] "tails" on the digits 6 and 9.
+.TP 8
+.B \-scroll
+.TP 8
+.B \-noscroll
+.br
+When the time changes, the digits scroll from the previous digit to the
+next digit.  The -noscroll option turns the behavior off.
+.TP 8
+.B \-blink
+.TP 8
+.B \-noblink
+.br
+The colon separating hours from minutes blinks on and off once per second.
+With the -noblink option, it remains on permanently.
+.TP 8
+.B \-persist
+.TP 8
+.B \-nopersist
+.br
+This option determines whether or not the clock display remains in the
+reverse video state after the alarm goes off.
+.TP 8
+.B \-fade
+.TP 8
+.B \-nofade
+.br
+This option, when enabled, causes the display to fade from one digit to the
+next instead of jumping or scrolling.  If fade is specified, the \fBscroll\fP
+attribute will be automatically disabled.
+.TP 8
+.B \-fadeRate \fIn\fP
+The fadeRate attribute takes an integer value which specifies the
+number of milliseconds to wait between iterations when fading from
+one digit to the next.  A larger value will make the fade slower and
+more pronounced.  The default is 50.
+.TP 8
+.B \-audioPlay \fIfilename\fP
+Specifies an executable to use to play audio files for the bell and alarm.
+The default is none, which falls back to using the system bell for both the
+dclock bell and alarm.
+.TP 8
+.B \-date \fI"format"\fP
+The date is printed under the time in the specified font.  The string
+displayed is in the "format" argument.  The format corresponds to the
+system call strftime() (see strftime(3)).
+.br
+.sp
+.ti +2
+dclock -date "Today is %A"
+.sp
+Useful examples of strftime() formatting:
+.in +2
+.nf
+%A	Full weekday name
+%a	Three-char weekday name (Sun, Mon, Tue...)
+%B	Full month name
+%b	Three-char month name (Jan, Feb, Mar...)
+%d	The date (numerical day number of the month)
+%Y	Full year (4 digits)
+%y	2-digit year number
+.fi
+.in -2
+.TP 8
+.B \-dateup
+By default, the date string is at the bottom of the display. This option
+starts it at the top, instead.
+.TP 8
+.B \-alarm
+.TP 8
+.B \-noalarm
+.br
+The alarm is turned on or off.  Alarm rings bell and toggles reverse 
+video.
+.br
+.TP 8
+.B \-alarmTime \fIHH:MM\fP
+If alarm is set, it goes off at time specified in 24-hour format.
+.TP 8
+.B \-alarmFile \fIfilename\fP
+This specifies a sound file to use to play the dclock alarm.  If
+unspecified, or the string "NULL" is used, the system beep is used
+instead.  The sound file format must be understood by the executable
+specified by option "audioPlay".  The "NULL" string is a means to
+override a system-level setting to disable external sound playing.
+.TP 8
+.B \-seconds
+This option will update the clock every second and display the time
+including the seconds.
+.TP 8
+.B \-slope \fIvalue\fP
+Sets the angle of the digits according to the (floating-point) slope
+value \fIvalue\fP.
+.TP 8
+.B \-thickness \fIwidth_factor\fP
+Sets the segment thickness as a (floating-point) ratio to digit width.
+.TP 8
+.B \-spacing \fIspace_factor\fP
+Sets the digit spacing as a (floating-point) ratio to digit width.
+.TP 8
+.B \-smallsize \fIspace_factor\fP
+Sets the seconds digit size as a (floating-point) ratio to the digit size
+of the minutes and hours digits.
+.TP 8
+.B \-second_gap \fIspace_factor\fP
+Sets the spacing of the seconds digits from the other digits as a
+(floating-point) ratio to digit width.
+.B \-bg \fIcolor\fP
+This option specifies the color to use for the background of the window.  
+The default is ``darkslategray''.
+.TP 8
+.B \-bd \fIcolor\fP
+This option specifies the color to use for the border of the window.
+The default is ``black.''
+.TP 8
+.B \-bw \fInumber\fP
+This option specifies the width in pixels of the border surrounding the window.
+.TP 8
+.B \-fg \fIcolor\fP
+This option specifies the color to use for displaying text and digit segments.
+The default is ``chartreuse''.
+.TP 8
+.B \-led_off \fIcolor\fP
+This option specifies the color to use for displaying digit segments when
+turned off.  The default is ``darkgreen''.
+.TP 8
+.B \-fn \fIfont\fP
+This option specifies the font to be used for displaying normal text.  The
+default is ``Fixed.''
+.TP 8
+.B \-geometry \fIgeometry\fP
+This option specifies the prefered size and position of the clock window.
+.TP 8
+.B \-display \fIhost\fP:\fIdisplay\fP
+This option specifies the X server to contact.
+.TP 8
+.B \-xrm \fIresourcestring\fP
+This option specifies a resource string to be used.  This is especially
+useful for setting resources that do not have separate command line options.
+.SH X DEFAULTS
+It understands all of the core resource names and
+classes as well as:
+.PP
+.TP 8
+.B width (\fPclass\fB Width)
+Specifies the width of the clock.
+.TP 8
+.B height (\fPclass\fB Height)
+Specifies the height of the clock.
+.TP 8
+.B foreground (\fPclass\fB Foreground)
+Specifies the color for the digits.  Using the class specifies the
+color for all things that normally would appear in the foreground color.
+The default is ``chartreuse''.
+.TP 8
+.B background (\fPclass\fB Background)
+Specifies the background color, by default ``DarkSlateGray''.
+.TP 8
+.B led_off (\fPclass\fB Foreground)
+Specifies the color of the digit segments when ``off''.  This can be
+set to be the background color, or it can be set to a color just
+slightly different from the background, matching the segment colors,
+to give just a hint of color.  Default ``DarkGreen'' works well with
+the default segment color of ``chartreuse''.
+.TP 8
+.B bell (\fPclass\fB Boolean)
+Specifies whether or not a bell should be rung on the hour and half hour.
+.TP 8
+.B font (\fPclass\fB Font)
+Specifies the font to be used for the date.
+.TP 8
+.B militaryTime (\fPclass\fB Boolean)
+Specifies whether the military (24hr) time format should be used.
+.TP 8
+.B utc (\fPclass\fB Boolean)
+Specifies whether UTC (GMT) time should be used, rather than local time.
+.TP 8
+.B reverseVideo (\fPclass\fB ReverseVideo)
+Specifies that the foreground and background colors should be reversed.
+.TP 8
+.B scroll (\fPclass\fB Boolean)
+Specifies whether the digits should scroll or not.
+.TP 8
+.B fade (\fPclass\fB Boolean)
+Specifies whether the digits should fade or not.
+.TP 8
+.B fadeRate (\fPclass\fB Time)
+The number of milliseconds of delay between iterations of fading.
+.TP 8
+.B seconds (\fPclass\fB Boolean)
+Specifies whether the seconds should be displayed or not.
+.TP 8
+.B bell (\fPclass\fB Boolean)
+Specifies whether the bell should sound on the half hour and on the hour.
+.TP 8
+.B tails (\fPclass\fB Boolean)
+Specifies whether tails should be put on the digits 6 and 9.
+.TP 8
+.B blink (\fPclass\fB Boolean)
+Specifies whether the colon separating hours from minutes should blink on
+and off once per second or remain on permanently.
+.TP 8
+.B alarm (\fPclass\fB Boolean)
+Specifies whether the alarm should go off at the specified time (alarmTime).
+.TP 8
+.B alarmTime (\fPclass\fB String)
+Specifies the time alarm goes off if alarm is set.
+.TP 8
+.B alarmPersist (\fPclass\fB Boolean)
+Specifies whether the alarm should remain in reverse video after the alarm
+goes off, or return to normal video.
+.TP 8
+.B angle (\fPclass\fB Float)
+Defines the slope of the digits (default 6).
+.TP 8
+.B smallRatio (\fPclass\fB Float)
+Defines the size of the seconds digits compared to the minutes digits
+(default 2/3).
+.TP 8
+.B secondGap (\fPclass\fB Float)
+Defines the amount of space between the minutes digits and the seconds digits
+(default 0.3).
+.TP 8
+.B widthFactor (\fPclass\fB Float)
+Determines the width of segments as a ratio to digit width (default 0.13).
+.TP 8
+.B spaceFactor (\fPclass\fB Float)
+Determines the spacing between digit as a ratio to digit width (default 0.09).
+.TP 8
+.B bellFile (\fPclass\fB String)
+Specifies an audio file to play for the hourly bell (no default).
+.TP 8
+.B alarmFile (\fPclass\fB String)
+Specifies an audio file to play for the alarm (no default).
+.TP 8
+.B audioPlay (\fPclass\fB String)
+Specifies an executable to use to play the bell and alarm audio files, if
+they are specified.  Otherwise, the system bell is used (default is
+"/usr/bin/play").
+.SH ENVIRONMENT
+.PP
+.TP 8
+.B DISPLAY
+to get the default host and display number.
+.B XENVIRONMENT
+to get the name of a resource file that overrides the global resources
+stored in the RESOURCE_MANAGER property.
+.SH "SEE ALSO"
+X(1), xrdb(1), time(3C).
+.SH BUGS
+.I Dclock
+believes the system clock.
+.PP
+Scrolling from 9 to 10 O'Clock seems weird, but chances are you won't
+notice it.
+.PP
+Scrolling can take so long that dclock may lag behind system time by
+a fraction of a second and eventually skip a second to catch up.
+In modern times, it should be dealing with this by tracking seconds
+with a separate thread.
+.SH COPYRIGHT
+Copyright (c) 1988, Dan Heller.
+Revisions copyright (c) 1993 and 1999, Tim Edwards.
+.SH AUTHOR
+.nf
+Original dclock by Dan Heller (1988) <argv@sun.com> or <dheller@cory.berkeley.edu>
+.br
+Fade & tails by Steve Reinhardt, <steven@fts.webo.dg.com>
+.br
+Derived geometry by Tim Edwards (1993) <tim@stravinsky.jhuapl.edu>
+.br
+Antialiasing, color fades, and audio play by Tim Edwards (1999)
+<tim@stravinsky.jhuapl.edu>
+.fi

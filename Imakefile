@@ -1,0 +1,18 @@
+LOCAL_LIBRARIES = $(XTOOLLIB) $(XLIB)
+SYS_LIBRARIES = -lm
+# CDEBUGFLAGS = -O2
+CDEBUGFLAGS = -g
+
+# Comment out the following 3 lines for systems without freetype
+
+CCOPTIONS = -I/usr/include/freetype2
+DEFINES = -DXFT_SUPPORT
+EXTRA_LIBRARIES = -lXft
+
+SRCS = Dclock.c dclock.c
+OBJS = Dclock.o dclock.o
+
+ComplexProgramTarget(dclock)
+
+dclock.o:       Dclock.h
+Dclock.o:       DclockP.h

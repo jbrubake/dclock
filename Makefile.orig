@@ -1,0 +1,43 @@
+#
+# This is a Makefile for those people not using xmkmf to compile dclock.
+#
+# Remember to add the path to your X include files to CFLAGS and to 
+# add the path to your X libraries to the front of LIBS. 
+# 
+prefix= /usr/local
+bindir= $(prefix)/bin
+mandir= $(prefix)/man/man1
+appdir= ${prefix}/etc/X11/app-defaults
+
+PROGRAM= dclock
+SRCS= Dclock.c dclock.c
+OBJS= Dclock.o dclock.o
+HFILES= Dclock.h DclockP.h patchlevel.h
+ADFILE= DClock
+
+CC= gcc
+CFLAGS= -O
+LDFLAGS= 
+LIBS= -lm -lXt -lX11
+
+$(PROGRAM): ${OBJS}
+	${CC} ${LDFLAGS} ${OBJS} ${LIBS} -o $(PROGRAM)
+
+$(ADFILE): Dclock.ad
+	cp -p $< $@
+
+clean: ; rm -f ${OBJS} core $(PROGRAM) $(ADFILE)
+
+install: $(PROGRAM) $(ADFILE)
+	install -d $(bindir) $(mandir)
+	install --mode=0755 $(PROGRAM) $(bindir)
+	install --mode=0644 $(ADFILE) $(appdir)
+	install -d ${prefix}/man/man1
+	install -d ${prefix}/bin
+	install -d ${prefix}/etc/X11/app-defaults
+	
+
+shar: ; shar README Makefile dclock.man ${HFILES} ${SRCS} > dclock.shar
+
+tar: ; tar fcv - README Makefile dclock.man ${HFILES} ${SRCS} | \
+        compress > dclock.tar.Z

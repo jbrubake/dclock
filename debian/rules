@@ -1,0 +1,63 @@
+#!/usr/bin/make -f
+
+# This script uses debhelper by Joey Hess
+export DH_VERBOSE=1
+export DH_COMPAT=4
+
+DEB=debian/dclock
+
+PROGRAM= dclock
+SRCS= Dclock.c dclock.c
+OBJS= Dclock.o dclock.o
+HFILES= Dclock.h DclockP.h patchlevel.h
+
+CFLAGS= -O
+LDFLAGS= 
+LIBS= -lm -lXt -lX11
+
+$(PROGRAM): ${OBJS}
+	${CC} ${LDFLAGS} ${OBJS} ${LIBS} -o $(PROGRAM)
+
+build:	build-stamp
+build-stamp: $(PROGRAM)
+	dh_testdir
+	touch build-stamp
+
+clean:
+	dh_testdir
+	rm -f build-stamp
+	rm -f $(PROGRAM) ${OBJS}
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+binary-indep:	build install
+binary-arch:	build install
+#	dh_testversion 2
+	dh_testdir
+	dh_testroot
+	dh_installdebconf
+	dh_installdirs usr/bin usr/share/sounds etc/X11/app-defaults
+	# move files into debian/tmp
+	cp $(PROGRAM) $(DEB)/usr/bin
+	cp sounds/* $(DEB)/usr/share/sounds
+	cp Dclock.ad $(DEB)/etc/X11/app-defaults/DClock
+	dh_installdocs TODO
+	dh_installmenu
+	dh_installman $(PROGRAM).1
+	dh_installchangelogs
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary:	binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary

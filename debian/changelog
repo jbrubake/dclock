@@ -1,0 +1,116 @@
+dclock (2.1.2-8) unstable; urgency=low
+
+dclock (2.1.2-8) unstable; urgency=low
+
+  * fix FTBFS (X11's imake build procedure is gone).  Thanks to Harri
+    Dunkel for the patch (closes: #363055)
+
+ -- Adrian Bridgett <bridgett@debian.org>  Sun,  9 Jul 2006 09:50:08 +0100
+
+dclock (2.1.2-7) unstable; urgency=low
+
+  * allow overriding of bellFile sound and alarmFile sounds. 
+    Based on a patch by Nadim Shaikli (closes: #289780)
+  * upgrade DH_COMPAT to v4
+
+ -- Adrian Bridgett <bridgett@debian.org>  Mon, 29 Aug 2005 14:06:08 +0100
+
+dclock (2.1.2-6) unstable; urgency=low
+
+  * ACK of NMU
+  * disable external sounds if we have problems using them (closes: #266359)
+  * only ring the alarm bell once, not as many times as we can in 5seconds
+
+ -- Adrian Bridgett <bridgett@debian.org>  Tue,  7 Sep 2004 10:46:11 +0100
+
+dclock (2.1.2-5.1) unstable; urgency=low
+
+  * Non-maintainer upload
+  * Dclock.c, playbell(): print error and exit if audio player can not
+    be execv'ed  (closes: #253704)
+  * recommend package 'sox' to enable sound and explain it in the package
+    description (closes: #234258)
+  * build-depend on debhelper >= 2 (closes: #259729)
+
+ -- Martin Pitt <mpitt@debian.org>  Fri, 16 Jul 2004 14:26:56 +0200
+
+dclock (2.1.2-5) unstable; urgency=low
+
+  * manpage didn't mention -noblink option (closes: #227068)
+    thanks to Sven Rudolph for spotting this and providing a patch.
+
+ -- Adrian Bridgett <bridgett@debian.org>  Sun, 18 Jan 2004 13:44:46 +0000
+
+dclock (2.1.2-4) unstable; urgency=low
+
+  * s/miltime/militaryTime/ for X resource in manpage (closes: #198669)
+
+ -- Adrian Bridgett <bridgett@debian.org>  Tue, 24 Jun 2003 21:37:37 +0100
+
+dclock (2.1.2-3) unstable; urgency=low
+
+  * lintian fixes
+  * darn typo in last changelog - let's close it here (closes: #185864)
+
+ -- Adrian Bridgett <bridgett@debian.org>  Sat, 31 May 2003 22:01:50 +0100
+
+dclock (2.1.2-2) unstable; urgency=low
+
+  * patch from Robert Macomber to stop dclock missing some updates.
+    I've actually only added 1 onto next_intr, as I can explain that, but
+    not 100 (close: #185864)
+
+ -- Adrian Bridgett <bridgett@debian.org>  Mon, 21 Apr 2003 19:02:40 +0100
+
+dclock (2.1.2-1) unstable; urgency=low
+
+  * slightly newer code at upstream location (I've named it 2.1.2)
+  * build-depends were right, mark bug as fixed (closes: #122166)
+  * app-defaults file was wrongly named. Set dclock.input:true to fix
+    a WM interaction(closes: #98840)
+
+ -- Adrian Bridgett <bridgett@debian.org>  Sat,  2 Feb 2002 21:26:38 +0000
+
+dclock (2.1.1-6) unstable; urgency=low
+
+  * add some build-depends for #122166
+
+ -- Adrian Bridgett <bridgett@debian.org>  Mon,  3 Dec 2001 18:53:36 +0000
+
+dclock (2.1.1-5) unstable; urgency=low
+
+  * refer to the X Window System properly (close: #119841)
+
+ -- Adrian Bridgett <bridgett@debian.org>  Sun,  2 Dec 2001 14:32:00 +0000
+
+dclock (2.1.1-4) unstable; urgency=low
+
+  * app-defaults files must be marked conffiles
+
+ -- Adrian Bridgett <bridgett@debian.org>  Sun,  4 Mar 2001 18:55:21 +0000
+
+dclock (2.1.1-3) unstable; urgency=low
+
+  * use time.h not sys/time.h (closes: #86957)
+
+ -- Adrian Bridgett <bridgett@debian.org>  Sat,  3 Mar 2001 15:33:23 +0000
+
+dclock (2.1.1-2) unstable; urgency=low
+
+  * use new app-defaults location (closes: #86265)
+
+ -- Adrian Bridgett <bridgett@debian.org>  Sun, 18 Feb 2001 20:31:10 +0000
+
+dclock (2.1.1-1) unstable; urgency=low
+
+  * new upstream (thanks to Harald Dunkel)
+    NB: The version number _hadn't_ changed upstream
+  * use /usr/share/sounds like other programs (closes: #79159)
+
+ -- Adrian Bridgett <bridgett@debian.org>  Tue, 26 Dec 2000 18:50:50 +0000
+
+dclock (2.1-1) unstable; urgency=low
+
+  * initial release.
+
+ -- Adrian Bridgett <bridgett@debian.org>  Mon,  3 Jan 2000 14:47:11 +0000

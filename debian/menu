@@ -1,0 +1,2 @@
+?package(dclock):command="/usr/bin/dclock" needs="X11" \
+               section="Apps/Tools" title="dclock"

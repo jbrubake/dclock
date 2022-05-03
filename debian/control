@@ -1,0 +1,18 @@
+Source: dclock
+Section: x11
+Priority: optional
+Maintainer: Adrian Bridgett <bridgett@debian.org>
+Build-depends: debhelper (>=4), xutils, libxt-dev
+Standards-Version: 3.6.2.1
+
+Package: dclock
+Architecture: any
+Depends: ${shlibs:Depends} ${misc:Depends}
+Recommends: sox
+Description: Digital clock for the X Window System with flexible display
+ Dclock main feature is its great flexibility in how it can draw. You can 
+ even display the output from "date" in it such as "Wednesday, 3rd Jan".
+ Dclock also supports setting an alarm.
+ .
+ You need the package sox if you want to enable sound for alarm and
+ hourly bells (rather than beeps)

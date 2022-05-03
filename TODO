@@ -1,0 +1,10 @@
+Possible things to come:
+
+ 1) AM/PM in graphics window
+ 2) AM/PM format allowed in alarm-time display and command line
+ 3) Choose date string font size as a fraction of the window size
+ 4) Send stderr print statements to a static text window
+ 5) Stopwatch option
+ 6) Timer (countdown) option
+ 7) Timezone option
+
